@@ -24,9 +24,9 @@ export default function Layout () {
             storedBreakInterval = JSON.parse(storedBreakInterval)
         let storedFocusInterval = window.localStorage.getItem('storedFocusInterval')
             storedFocusInterval = JSON.parse(storedFocusInterval)
-        console.log("storedSession",storedSession)
-        console.log("storedBreakInterval", storedBreakInterval)
-        console.log("storedFocuskInterval", storedFocusInterval)
+        // console.log("storedSession",storedSession)
+        // console.log("storedBreakInterval", storedBreakInterval)
+        // console.log("storedFocuskInterval", storedFocusInterval)
         if (storedUrl="/Timer" && session === null) {
             setSession (() => storedSession)
             // setBreakInterval(() => storedBreakInterval)
@@ -41,12 +41,10 @@ export default function Layout () {
         const timerToolTip = document.querySelector("#timerToolTip")
         if(timerToolTip) timerToolTip.style.display = "none"
     }, [session])
-    
-    // Second part: handleLocker
     const [lock, setLock] = useState(true)
-    const [key, setKey] = useState("")
-    console.log(session)
- 
+    const[password, setPassword] = useState ("hello")
+
+    // Second part: handleLocker
     return <>
     <div className = "container-fluid m-0 p-0 position-relative">
         <header className = "mb-3">
@@ -68,8 +66,8 @@ export default function Layout () {
         <footer>
             <Footer lock = {lock}
                     setLock = {setLock}
-                    key = {key}
-                    setKey = {setKey}
+                    password = {password}
+                    setPassword = {setPassword}
             />
         </footer>
     </div>

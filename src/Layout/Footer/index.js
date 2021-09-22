@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import { NoteIcon } from "../../utils/Icons/Footer";
 import Adding from "./Adding";
 import "./index.css"
@@ -8,19 +8,22 @@ export default function Footer (prop) {
     const {
         lock,
         setLock,
-        key,
-        setKey
+        password,
+        setPassword
     } = prop
 
+    const [key, setKey] = useState("hello")
+   
     const [display, setDisplay] = useState ("")
+    // console.log(display)
     return <>
         <div className = "locker" 
             >
             <Locker 
                     lock = {lock}
                     setLock = {setLock}
-                    key = {key}
-                    setKey = {setKey}
+                    password = {password}
+                    setPassword = {setPassword}
             />
         </div>
     
@@ -41,8 +44,8 @@ export default function Footer (prop) {
                     setDisplay = {setDisplay}
                     lock = {lock}
                     setLock = {setLock}
-                    key = {key}
-                    setKey = {setKey}
+                    
+                   
                 />
     </div>
     <div    className = "addingBox"
@@ -51,6 +54,7 @@ export default function Footer (prop) {
         <Noting 
                     display = {display}
                     setDisplay = {setDisplay}
+                   
         
         />
     </div>

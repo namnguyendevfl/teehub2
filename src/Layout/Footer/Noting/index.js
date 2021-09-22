@@ -6,7 +6,7 @@ import Messages from "./Messages";
 import Notes from "./Notes";
 import TODOs from "./ToDos";
 export default function Noting ({display, setDisplay}) {
-    
+
     const handleClick = (event) => {
         event.preventDefault();
         setDisplay(() => event.target.id)

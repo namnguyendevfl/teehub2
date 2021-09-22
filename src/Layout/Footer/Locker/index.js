@@ -1,14 +1,16 @@
 import React, {useEffect, useState} from "react";
 import { Lock, Unlock, ForwardArrow }  from "../../../utils/Icons/Footer";
 export default function Locker (prop) {
-    // const {
-    //     lock,
-    //     setLock,
-    //     key,
-    //     setKey
-    // } = prop
+    const {
+        // lock,
+        // setLock,
+        password,
+        setPassword,
+    } = prop
     const [lock, setLock] = useState(true)
-    const [key, setKey] = useState("")
+ 
+    console.log(password)
+    const [inputKey, setInputKey] = useState("")
     const [lockerFormDisplay, setLockerFormDisplay] = useState (false)
     const [error, setError] = useState(false)
     // Set up the passwordbox to disappear when we load up
@@ -31,7 +33,7 @@ export default function Locker (prop) {
         (lock === true) 
         ?   setLockerFormDisplay (() => !lockerFormDisplay)
         :   setLockerFormDisplay (() => false)
-        setKey(() => {if(lock) return ""})   
+        setInputKey(() => {if(lock) return ""})   
     }
 
     const handleBoxClick = ({target}) => {
@@ -42,12 +44,13 @@ export default function Locker (prop) {
     }
 
     const handleChange = ({target}) => {
-        setKey(() => target.value)
+        setInputKey(() => target.value)
     }
     
     const handleSubmit = (event) => {
         event.preventDefault()
-        if(key === "a") 
+        // if(key === inputKey) 
+        if(inputKey === password)
         {   
             setLock(() => false)
             setError(()=>false)
@@ -66,7 +69,9 @@ export default function Locker (prop) {
                 box.style.boxShadow = "0px 0px 4px 0.5px lightgrey"
                 box.style.border = "1px solid lightgrey"
             }
-        if (key !== "a"){
+        // if (inputKey !== key)
+        if(inputKey !== password)
+        {
             if (target.id !== "submit")
             setError(() => false)
         }
@@ -96,7 +101,8 @@ export default function Locker (prop) {
                     placeholder = "What's your key"
                     onClick = {handleBoxClick}
                     onChange = {handleChange}
-                    value = {key}
+                    
+                    value = {inputKey}
                 >
                 </input>
                 

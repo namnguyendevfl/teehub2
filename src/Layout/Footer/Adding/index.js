@@ -1,5 +1,6 @@
 import React from "react";
 export default function Adding ({setDisplay}) {
+   
     const handleClick = ({target}) => {
         const addingBox = document.querySelector("#addingBox")
         addingBox.style.display = "block"
