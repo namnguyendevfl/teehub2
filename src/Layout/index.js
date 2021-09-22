@@ -24,12 +24,19 @@ export default function Layout () {
             storedBreakInterval = JSON.parse(storedBreakInterval)
         let storedFocusInterval = window.localStorage.getItem('storedFocusInterval')
             storedFocusInterval = JSON.parse(storedFocusInterval)
-        // console.log("storedSession",storedSession)
-        // console.log("storedBreakInterval", storedBreakInterval)
+        console.log("storedSession",storedSession)
+        console.log("storedBreakInterval", storedBreakInterval)
+        console.log("storedFocuskInterval", storedFocusInterval)
         if (storedUrl="/Timer" && session === null) {
             setSession (() => storedSession)
-            setBreakInterval(() => storedBreakInterval)
-            setFocusInterval (() => storedFocusInterval)
+            // setBreakInterval(() => storedBreakInterval)
+            // setFocusInterval (() => storedFocusInterval)
+        }
+        // Fix a pomodoro bug when its not running the next session after refresshing b/c I didnt add interval to the session
+        else {
+            setSession (() => session)
+            setBreakInterval (() => session.interval)
+            setFocusInterval (() => session.interval)
         }
         const timerToolTip = document.querySelector("#timerToolTip")
         if(timerToolTip) timerToolTip.style.display = "none"
