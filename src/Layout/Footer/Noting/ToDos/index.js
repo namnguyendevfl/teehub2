@@ -14,9 +14,9 @@ export default function TODOs() {
     </span>
 </button>
 </div>
-<hr className = "p-0 m-0"/>
+{/* <hr className = "p-0 m-0 bg-primary color-primary"/> */}
 
-<div>
+<div className = "itemBox vh-100">
 <ol className = " itemList p-0">
     <li className ="pe-4 ps-3 py-2"> 
         <span className = "check"> 

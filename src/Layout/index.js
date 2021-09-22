@@ -6,15 +6,17 @@ import Main from "./Main";
 import "./index.css"
 
 export default function Layout () {
+    //First part: Running Pomodoro
     const [isTimerRunning, setIsTimerRunning] = useState(false)
     const [session, setSession] = useState(null)
-    const [focusInterval, setFocusInterval] = useState(1)
-    const [breakInterval, setBreakInterval] = useState(1)
+    const [focusInterval, setFocusInterval] = useState("")
+    const [breakInterval, setBreakInterval] = useState("")
     // Run the past history from localStorage
     const history = useHistory()
     useEffect (() => {
         let storedUrl = window.localStorage.getItem('Url')
             storedUrl = JSON.parse(storedUrl)
+        if(storedUrl)
         history.push(storedUrl) 
         let storedSession = window.localStorage.getItem('storedSession')
             storedSession = JSON.parse(storedSession)
@@ -33,10 +35,10 @@ export default function Layout () {
         if(timerToolTip) timerToolTip.style.display = "none"
     }, [session])
     
-    useEffect (() => {
-        const lockerBox = document.querySelector(".lockerField");
-        if(lockerBox) lockerBox.style.display = "none" 
-    },[])
+    // Second part: handleLocker
+    const [lock, setLock] = useState(true)
+    const [key, setKey] = useState("")
+    console.log(session)
  
     return <>
     <div className = "container-fluid m-0 p-0 position-relative">
@@ -57,7 +59,11 @@ export default function Layout () {
             <Main />
         </main>
         <footer>
-            <Footer />
+            <Footer lock = {lock}
+                    setLock = {setLock}
+                    key = {key}
+                    setKey = {setKey}
+            />
         </footer>
     </div>
     </>

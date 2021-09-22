@@ -1,6 +1,7 @@
 import React from "react";
 import { DownChevron } from "../../../utils/Icons/Footer";
 import Books from "./Books";
+import Locker from "./Locker";
 import Messages from "./Messages";
 import Notes from "./Notes";
 import TODOs from "./ToDos";
@@ -37,17 +38,10 @@ export default function Noting ({display, setDisplay}) {
             case "toDos":  
                 return <TODOs />
             case "passwords":
-                return <> passwords </>              
+                return <Locker />             
             default: <> </>
         }
     })
-
-
-    // const chosenDisplay = (() => {
-    //     
-    //     }
-        
-    // })()
 
     return <>
     <div 
@@ -95,11 +89,6 @@ export default function Noting ({display, setDisplay}) {
                         </span>    
                     </button>
                 </li>
-                {/* <li className ="pe-1">
-                    <button className = "chevronBtn">
-                    <DownChevron />
-                    </button>
-                </li> */}
             </ul>
         </div>
         <div className = "col-1 d-flex align-items-center justify-content-center float-end px-0 mx-0"> 

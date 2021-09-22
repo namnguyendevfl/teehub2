@@ -30,16 +30,8 @@ export default function Timing (prop) {
 
   const nextTick = (prevState) => {
     const timeRemaining = Math.max(0,prevState.timeRemaining - 1)
-    let timeElapsed
-    let timeElapsedPercent
-    if (prevState.label === "Focusing") {   
-        timeElapsed = focusInterval*60 - timeRemaining
-        timeElapsedPercent = timeElapsed/(focusInterval*60)*100
-    }
-    else {        
-        timeElapsed = breakInterval*60 - timeRemaining
-        timeElapsedPercent = timeElapsed/(breakInterval*60)*100
-    }
+    const timeElapsed = prevState.timeElapsed + 1
+    const timeElapsedPercent = timeElapsed/(prevState.interval*60)*100
     const session = {
         ...prevState,
         timeRemaining,
@@ -51,16 +43,19 @@ export default function Timing (prop) {
   }  
   
   //Step 3: Define the nextSession as either focusing or on break by stating function to transition the current session type to the next session
+  //Fixing a bug which does not memorize the interval of focusing and on break
   const nextSession = (focusInterval, breakInterval) => {
     return (currentSession) => 
       (currentSession.label === "Focusing")
       ?   { label: "On Break",
             timeRemaining: breakInterval *60,
+            interval: breakInterval,
             timeElapsed:0,
             timeElapsedPercent:0,
             numSession: currentSession.numSession}
       :   { label: "Focusing",
             timeRemaining: focusInterval *60,
+            interval: focusInterval,
             timeElapsed:0,
             timeElapsedPercent:0,
             numSession: currentSession.numSession + 1
@@ -111,8 +106,6 @@ export default function Timing (prop) {
         localStorage.removeItem('storedBreakInterval')
         localStorage.removeItem('storedFocusInterval')
         window.localStorage.setItem('Url',JSON.stringify("/"))
-        console.log(session)
-        console.log(sessionStorage)
         history.push("/")  
 
     }

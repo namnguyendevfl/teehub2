@@ -4,12 +4,24 @@ import Adding from "./Adding";
 import "./index.css"
 import Locker from "./Locker";
 import Noting from "./Noting";
-export default function Footer () {
+export default function Footer (prop) {
+    const {
+        lock,
+        setLock,
+        key,
+        setKey
+    } = prop
+
     const [display, setDisplay] = useState ("")
     return <>
         <div className = "locker" 
             >
-            <Locker />
+            <Locker 
+                    lock = {lock}
+                    setLock = {setLock}
+                    key = {key}
+                    setKey = {setKey}
+            />
         </div>
     
     {/* <div className = "note"
@@ -27,6 +39,10 @@ export default function Footer () {
         <Adding  
                     display = {display}
                     setDisplay = {setDisplay}
+                    lock = {lock}
+                    setLock = {setLock}
+                    key = {key}
+                    setKey = {setKey}
                 />
     </div>
     <div    className = "addingBox"
