@@ -10,31 +10,25 @@ export const SearchIcon = () =>
     </svg>
 
 export default function SearchBox () {
-    const [click, setClick] = useState("false")
-
-    useEffect (() => {setClick(false)},[])
     const handleClick = ({target}) => {
-        setClick(() => true)
-        
+        const box = target.parentNode
+        box.style.boxShadow = "0px 0px 2px 0.1px blue"
+        box.style.border = "1px solid blue"
     }
     window.addEventListener("click",({target}) => {
-        if (target.id !== "search")
-            setClick(() => false)
+        const box = document.querySelector(".searchBox")
+        if (target.id !== "search"){
+            if (box) {
+            box.style.boxShadow = "none"
+            box.style.border = "1px solid black"
+            }
+        }
     })  
-
-    let border
-    (click)
-    ? border = "blue"
-    : border = "black"
-
     return <>
-    <div    id = "search"
+    <div   
             className = " col d-flex justify-content-between align-items-center searchBox w-100 px-3"
-            style = {{border:`1px solid ${border}`}}>
-        {!click
-        ?<SearchIcon id = "search" />
-        :<> </>}
-        {/* <SearchIcon id = "search" /> */}
+            >
+        <SearchIcon />
         <input  type = "text"  
                 className = "searchInput ps-2"
                 id = "search"

@@ -3,6 +3,7 @@ import { Switch, Route,useHistory } from "react-router-dom";
 import Footer from "./Footer"
 import Header from "./Header";
 import Main from "./Main";
+import "./index.css"
 
 export default function Layout () {
     const [isTimerRunning, setIsTimerRunning] = useState(false)
@@ -28,10 +29,18 @@ export default function Layout () {
             setBreakInterval(() => storedBreakInterval)
             setFocusInterval (() => storedFocusInterval)
         }
-        console.log(session)
+        const timerToolTip = document.querySelector("#timerToolTip")
+        if(timerToolTip) timerToolTip.style.display = "none"
     }, [session])
+    
+    useEffect (() => {
+        const lockerBox = document.querySelector(".lockerField");
+        if(lockerBox) lockerBox.style.display = "none" 
+    },[])
+ 
     return <>
-        <header>
+    <div className = "container-fluid m-0 p-0 position-relative">
+        <header className = "mb-3">
             <Header 
                         isTimerRunning = {isTimerRunning} 
                         setIsTimerRunning = {setIsTimerRunning}
@@ -44,11 +53,12 @@ export default function Layout () {
             />
         </header>
 
-        <main>
+        <main className = "vh-100">
             <Main />
         </main>
         <footer>
             <Footer />
         </footer>
+    </div>
     </>
 }

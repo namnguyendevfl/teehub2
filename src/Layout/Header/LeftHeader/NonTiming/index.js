@@ -13,19 +13,43 @@ export default function NonTiming (prop) {
 } = prop
 
 
+
+// const [btnId, setBtnId] = useState ("home")
+// const handleBtnClick = ({target}) => {
+//     const timerToolTip = document.querySelector("#timerToolTip")
+//     console.log(timerToolTip.style.display)
+//     setBtnId(() => target.id)
+//     if (target.id === "timer") 
+//     if (timerToolTip) timerToolTip.style.display = "flex"
+//     // // if (timerToolTip.style.display === "none") 
+//     // timerToolTip.style.display = "flex"
+//     // // else setToolTipDisplay(() => false)
+// }
+
 const [btnId, setBtnId] = useState ("home")
 const [toolTipDisplay, setToolTipDisplay] = useState (false)
 
 const handleBtnClick = ({target}) => {
-    setBtnId(() => target.id)
-    if (target.id==="timer") setToolTipDisplay(() => !toolTipDisplay)
+    const targetId= target.id
+    setBtnId(() => targetId)
+    if (targetId==="timer" ) setToolTipDisplay(() => !toolTipDisplay)
     else setToolTipDisplay(() => false)
 }
 
 window.addEventListener("click",({target}) => {
-    if ((target.id !== "timer" && target.id !== "timerToolTip") && (toolTipDisplay))
-        setToolTipDisplay(() => false)
+    const targetId= target.id
+    if (targetId === "focusInterval" || targetId === "breakInterval") return setToolTipDisplay(() => true)
+    if ((targetId !== "timer" && targetId !== "timerToolTip") && (toolTipDisplay))
+    return setToolTipDisplay(() => false)
 })  
+
+
+const timerToolTip = document.querySelector("#timerToolTip")
+if(timerToolTip)
+toolTipDisplay
+?timerToolTip.style.display = "flex"
+:timerToolTip.style.display = "none"
+
 
 return <ul className = "nav ">
     <li className = "nav-item me-3">  
@@ -131,8 +155,6 @@ return <ul className = "nav ">
 
     </li> 
     <li className = "nav-item ">
-    {toolTipDisplay
-        ? <>
         <div className="toolTip button d-flex justify-content-center align-items-center border-white">
            <button  className = "button d-flex justify-content-center align-items-center border-white"
                     id = "timer"
@@ -149,20 +171,7 @@ return <ul className = "nav ">
                 setFocusInterval={setFocusInterval}
                 setBreakInterval={setBreakInterval}
                 setSession = {setSession}      
-            />
-        </>
-      : <>
-        <div className="toolTip button d-flex justify-content-center align-items-center border-white">
-            <button className = " button d-flex justify-content-center align-items-center border-white"
-                onClick = {handleBtnClick}
-                id = "timer"
-                > 
-                <Timer />
-            </button>
-            <span className = "tooltiptext" > Timer </span>
-        </div>
-        </>
-        } 
+            />     
     </li>
 </ul>
 }

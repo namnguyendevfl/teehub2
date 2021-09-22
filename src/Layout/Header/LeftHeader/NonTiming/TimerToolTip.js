@@ -1,11 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, { useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import { ForwardArrowWhite } from "../../../../utils/Icons/Header/LeftHeader";
 
-
-
 export default function TimerToolTip (prop) {
-
     const { setIsTimerRunning,
             setSession,
             focusInterval, 
@@ -21,7 +18,6 @@ export default function TimerToolTip (prop) {
     useEffect (() => {
       window.localStorage.setItem('storedFocusInterval',JSON.stringify(focusInterval))
       window.localStorage.setItem('storedBreakInterval',JSON.stringify(breakInterval))
-      // window.localStorage.setItem('storedSession',JSON.stringify(session))
     })
     
     const history = useHistory()
@@ -58,29 +54,29 @@ export default function TimerToolTip (prop) {
       <div  className = "toolTip"
             id = "timerToolTip"
       >
-        <div  id = "timerToolTip"
+        <div  
               className = "flex-nowrap d-flex toolTipBar timerToolTipBar"          
             >
-          <div  id = "timerToolTip"
+          <div  
                 className ="d-flex justify-content-center align-items-center ">
-            <input  id = "timerToolTip"
+            <input  id = "focusInterval"
                     type ="text"
-                    name = "focusDuration"
+                    name = "focusInterval"
                     className ="durationInput" 
                         // value = {focusInterval}
                     placeholder = "Focus"
                     onChange = {handleFocus}
             ></input>
-            <input  id = "timerToolTip"
+            <input  id = "breakInterval"
                     type ="text"
-                    name = "breakDuration"
+                    name = "breakInterval"
                     className ="durationInput"
                     placeholder = "Break"
                     //   value = {breakInterval}
                     onChange = {handleBreak}
             ></input>  
             <button type = "submit"
-                    id = "timerToolTip"
+                    id = "timerSubmitBtn"
                     className =" forwardBtn d-flex align-items-center justify-content-center"
                     onClick ={handleClick}    
                     >

@@ -2,6 +2,8 @@ header {
     height: 60px;
     background-color: white;
     padding-top: 2px;
+    position: sticky;
+    top: 0px;
 }
 
 .headerBar{
@@ -168,9 +170,18 @@ header {
         font-size: small;
         min-width: 110px;
     }
+    /* .searchBox:focus{
+        box-shadow: 0px 0px 2px 0.1px blue ;
+    } */
     .searchInput::placeholder{
         font-size: 1.2em;
     }
+/*  */
+
+
+
+
+      
 /*Styling placeholder */
 .durationInput::placeholder{
     color: #90979c;
@@ -180,5 +191,11 @@ header {
     align-items: center;
     justify-content: center; */
   }
+
+
+
+  /* input:hover {
+    box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+  } */
 
  

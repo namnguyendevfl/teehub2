@@ -1,30 +1,42 @@
 import React,{useState} from "react";
 import { NoteIcon } from "../../utils/Icons/Footer";
+import Adding from "./Adding";
 import "./index.css"
-
 import Locker from "./Locker";
 import Noting from "./Noting";
 export default function Footer () {
-    const [note, setNote] = useState(false)
-    const handleClick = () => {
-        setNote(() => !note)
-    }
-    let display
-    (note)
-    ? display = "block"
-    : display = "none"
-
+    const [display, setDisplay] = useState ("")
     return <>
-        <Locker />
-        <div >
-        <button className = "NoteBtn"
+        <div className = "locker" 
+            >
+            <Locker />
+        </div>
+    
+    {/* <div className = "note"
+       
+        >
+        <button className = "noteBtn"
                 onClick = {handleClick}
         > 
             <NoteIcon />
         </button>
+    </div> */}
+    <div    className = "addingBar"
+            id = "addingBar"
+        >
+        <Adding  
+                    display = {display}
+                    setDisplay = {setDisplay}
+                />
     </div>
-    <div style = {{display : `${display}`}}>
-        <Noting />
+    <div    className = "addingBox"
+            id = "addingBox"
+            >
+        <Noting 
+                    display = {display}
+                    setDisplay = {setDisplay}
+        
+        />
     </div>
     </>
 }
