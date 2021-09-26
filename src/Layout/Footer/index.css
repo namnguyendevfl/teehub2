@@ -14,8 +14,11 @@ button {
     position: fixed;
     bottom: 0;
     border:none;
+    outline:none;
     text-align: center;
     background: none;
+    z-index: 9;
+    
 }
 .lockerBtn {
     left:2px;
@@ -24,16 +27,29 @@ button {
 }
 
 .lockerForm, .errorField{
-    background-color: white;
-    width: 200px;
+    /* background-color: white; */
+    /* width: 200px; */
+    
     height: 38px;
     left: 40px;
     bottom:8px; 
+    background-color: white;
+    box-shadow : 0px 0px 2px 0.1px blue;
+    border : 1px solid blue;
 }
 
 .errorField{
     bottom:50px; 
-    background:none;
+    /* background:none; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px; 
+    background: black;
+    color: white;
+    box-shadow : none;
+    border : none;
+    left: 28px;
 }
 
 
@@ -42,7 +58,7 @@ button {
     font-size: 1em;
 }
 .lockerInput {
-    width: 160px; 
+    width: 170px; 
     color: black; 
     background-color: white;
 
@@ -58,18 +74,37 @@ button {
     border-radius: 50%;
 }
 .submitBtn:hover{
-    background-color: #e9ecef
+    /* background-color: #e9ecef */
+    background-color: lightgrey;
 }
 
 /* Style for adding */
 
-.addingBar {
+.addingBar, .lockerBar {
     background: white;
     height: 38px;
     width: 370px;
     position: fixed;
     bottom: 0;
     right: 20px;
+}
+
+.lockerBar {
+    background: white;
+    height: 38px;
+    width: 370px;
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lockerBar:hover{
+    /* background-color: #e9ecef */
+    opacity:0.7
+    /* background-color: lightgrey; */
 }
 .item {
     font-weight:500
@@ -81,7 +116,7 @@ font-weight:640
 }
 
 /* Adding Box */
-.addingBox {
+.addingBox, .lockerBox {
     border-radius: 8px 8px 0 0;
     box-shadow: 0px 2px 15px 5px lightgrey;
     width: 250px;

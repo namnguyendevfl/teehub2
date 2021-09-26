@@ -119,9 +119,11 @@ export const JournalsFilled = () =>
         fill={blue}
         className="bi bi-journal" viewBox="0 0 16 16">
         <path 
+            fill={blue}
             id = "journal" 
             d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
         <path 
+            fill={blue}
             id = "journal" 
             d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
     </svg>
@@ -185,6 +187,7 @@ export const PlayFilled = () =>
         width="32" height="32" fill={blue}
         className="bi bi-play" viewBox="0 0 16 16">
         <path 
+            fill={blue}
             d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/>
     </svg>
 

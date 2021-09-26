@@ -2,26 +2,28 @@ import React, { useEffect} from "react";
 import { useHistory } from "react-router-dom";
 import { ForwardArrowWhite } from "../../../../utils/Icons/Header/LeftHeader";
 
-export default function TimerToolTip (prop) {
+export default function TimerToolTip (props) {
     const { setIsTimerRunning,
             setSession,
             focusInterval, 
             setFocusInterval,
             breakInterval, 
             setBreakInterval,
-          } = prop
+          } = props
 
     const handleFocus = ({target}) => setFocusInterval(() => target.value)
     const handleBreak = ({target}) => setBreakInterval(() => target.value)    
-    
-    //Save focusInterval, breakInterval and session to the localstorage
-    useEffect (() => {
-      window.localStorage.setItem('storedFocusInterval',JSON.stringify(focusInterval))
-      window.localStorage.setItem('storedBreakInterval',JSON.stringify(breakInterval))
-    })
+    // useEffect (() => {
+    //   window.localStorage.setItem('storedFocusInterval',JSON.stringify(focusInterval))
+    //   window.localStorage.setItem('storedBreakInterval',JSON.stringify(breakInterval))
+    // })
     
     const history = useHistory()
     const handleClick = () => {
+      //Fix a pomodoro bug by storing focusInterval and breakInterval over here
+      //Save focusInterval, breakInterval and session to the localstorage
+      window.localStorage.setItem('storedFocusInterval',JSON.stringify(focusInterval))
+      window.localStorage.setItem('storedBreakInterval',JSON.stringify(breakInterval))
         //Switch the "pause" state variable when the playPause button is clicked 
         setIsTimerRunning((prevState) => {
           window.localStorage.setItem('Url',JSON.stringify("/Timer"))
@@ -34,7 +36,7 @@ export default function TimerToolTip (prop) {
               if (prevStateSession === null) {
                 const initialSession = {
                   label: "Focusing",
-                  timeRemaining: focusInterval * 60,
+                  // timeRemaining: focusInterval * 60,
                   interval: focusInterval,
                   timeElapsed: 0,
                   process:0,
@@ -57,8 +59,12 @@ export default function TimerToolTip (prop) {
         <div  
               className = "flex-nowrap d-flex toolTipBar timerToolTipBar"          
             >
-          <div  
-                className ="d-flex justify-content-center align-items-center ">
+          <form
+                className ="d-flex justify-content-center align-items-center "
+                onSubmit = {handleClick}
+                >
+            {/* <div  
+                className ="d-flex justify-content-center align-items-center "></div> */}
             <input  id = "focusInterval"
                     type ="text"
                     name = "focusInterval"
@@ -82,8 +88,8 @@ export default function TimerToolTip (prop) {
                     >
             <ForwardArrowWhite />
             </button>
-                    
-          </div>
+          </form>
+          {/* </div> */}
         </div>        
       </div>
     )

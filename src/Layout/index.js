@@ -25,8 +25,11 @@ export default function Layout () {
         let storedFocusInterval = window.localStorage.getItem('storedFocusInterval')
             storedFocusInterval = JSON.parse(storedFocusInterval)
         // console.log("storedSession",storedSession)
-        // console.log("storedBreakInterval", storedBreakInterval)
-        // console.log("storedFocuskInterval", storedFocusInterval)
+        //fixing a pomodoro bug by setting interval by localstorage values over here
+        setBreakInterval(() => storedBreakInterval)
+        setFocusInterval (() => storedFocusInterval)
+        console.log("storedBreakInterval", storedBreakInterval)
+        console.log("storedFocuskInterval", storedFocusInterval)
         if (storedUrl="/Timer" && session === null) {
             setSession (() => storedSession)
             // setBreakInterval(() => storedBreakInterval)
@@ -34,16 +37,25 @@ export default function Layout () {
         }
         // Fix a pomodoro bug when its not running the next session after refresshing b/c I didnt add interval to the session
         else {
-            setSession (() => session)
-            setBreakInterval (() => session.interval)
-            setFocusInterval (() => session.interval)
+            setSession (() => session);
+            // setBreakInterval (() =>breakInterval)
+            // setFocusInterval (() => focusInterval)
+            // (session.label === "Focusing")
+            // ? setFocusInterval (() => session.focusInterval)
+            // : setBreakInterval (() => session.breakInterval)    
         }
         const timerToolTip = document.querySelector("#timerToolTip")
         if(timerToolTip) timerToolTip.style.display = "none"
     }, [session])
-    const [lock, setLock] = useState(true)
-    const[password, setPassword] = useState ("hello")
-
+    const   [lock, setLock] = useState(true)
+    const   [password, setPassword] = useState ("hello")
+    useEffect (() => setLock(() => lock),[lock])
+    // console.log(lock)
+    console.log(session)
+    console.log(focusInterval)
+    console.log(breakInterval)
+    // console.log("storedBreakInterval", storedBreakInterval)
+    // console.log("storedFocuskInterval", storedFocusInterval)
     // Second part: handleLocker
     return <>
     <div className = "container-fluid m-0 p-0 position-relative">

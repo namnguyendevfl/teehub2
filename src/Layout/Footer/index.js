@@ -2,8 +2,10 @@ import React,{useState, useEffect} from "react";
 import { NoteIcon } from "../../utils/Icons/Footer";
 import Adding from "./Adding";
 import "./index.css"
-import Locker from "./Locker";
+import Locker from "./LockerBtn";
+import LockerBar from "./LockerBar";
 import Noting from "./Noting";
+import LockerBox from "./LockerBox";
 export default function Footer (prop) {
     const {
         lock,
@@ -12,10 +14,22 @@ export default function Footer (prop) {
         setPassword
     } = prop
 
-    const [key, setKey] = useState("hello")
-   
-    const [display, setDisplay] = useState ("")
-    // console.log(display)
+    const [display, setDisplay] = useState (false)
+    const handleClick = () => setDisplay(()=>!display)
+    const lockerBox = document.querySelector("#lockerBox")
+    if(lockerBox)
+        if (display)
+                lockerBox.style.display = "block"
+        else    lockerBox.style.display = "none"
+    console.log(display)
+    // (display)
+    // ? {
+        
+    //     lockerBox.style.display = "block"
+    // }
+    // : {
+
+    // }
     return <>
         <div className = "locker" 
             >
@@ -36,7 +50,7 @@ export default function Footer (prop) {
             <NoteIcon />
         </button>
     </div> */}
-    <div    className = "addingBar"
+    {/* <div    className = "addingBar"
             id = "addingBar"
         >
         <Adding  
@@ -46,9 +60,22 @@ export default function Footer (prop) {
                     setLock = {setLock}
                     
                    
+                /> */}
+
+    <button     className = "lockerBar px-3"
+                id = "lockerBar"
+                onClick = {handleClick}
+        >
+        <LockerBar
+                    // display = {display}
+                    // setDisplay = {setDisplay}
+                    // lock = {lock}
+                    // setLock = {setLock}
+                   
+                   
                 />
-    </div>
-    <div    className = "addingBox"
+    </button>
+    {/* <div    className = "lockerBox"
             id = "addingBox"
             >
         <Noting 
@@ -56,6 +83,16 @@ export default function Footer (prop) {
                     setDisplay = {setDisplay}
                    
         
+        />
+    </div> */}
+    <div    className = "lockerBox"
+            id = "lockerBox"
+            >
+        <LockerBox
+                    display = {display}
+                    setDisplay = {setDisplay}
+                    lock = {lock}
+                    setLock = {setLock}
         />
     </div>
     </>

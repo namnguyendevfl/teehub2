@@ -2,23 +2,23 @@ import React, {useEffect, useState} from "react";
 import { Lock, Unlock, ForwardArrow }  from "../../../utils/Icons/Footer";
 export default function Locker (prop) {
     const {
-        // lock,
-        // setLock,
+        lock,
+        setLock,
         password,
         setPassword,
     } = prop
-    const [lock, setLock] = useState(true)
- 
-    console.log(password)
+    const [lockBtn, setLockBtn] = useState(true)
     const [inputKey, setInputKey] = useState("")
     const [lockerFormDisplay, setLockerFormDisplay] = useState (false)
+    const [lockerBtnDisplay,setLockerBtnDisplay] = useState (true)
     const [error, setError] = useState(false)
-    // Set up the passwordbox to disappear when we load up
+    const [boxBorder, setBoxBorder] = useState(false)
+        // Set up the passwordbox to disappear when we load up
     useEffect (() => {
         const passwordError = document.querySelector("#passwordError")
             if(passwordError) {
                 if (error === true)
-                passwordError.style.display = "block"
+                passwordError.style.display = "flex"
                 else passwordError.style.display = "none"
                 }
         const lockerForm = document.querySelector(".lockerForm");
@@ -29,15 +29,18 @@ export default function Locker (prop) {
     },[lockerFormDisplay, error])
 
     const handleLockerBtnClick = () => {
-        setLock(() => !lock);
-        (lock === true) 
+        setLockBtn(() => !lockBtn);
+        (lockBtn === true) 
         ?   setLockerFormDisplay (() => !lockerFormDisplay)
         :   setLockerFormDisplay (() => false)
-        setInputKey(() => {if(lock) return ""})   
+        setInputKey(() => {if(lockBtn) return ""})  
+        if(lock===false) setLock (()=>true)  
     }
 
     const handleBoxClick = ({target}) => {
-        setLock(() => false)
+        setLockBtn(() => false)
+        setBoxBorder (()=>true)
+        setError (()=>false)
         const keyBox = target.parentNode
         keyBox.style.boxShadow = "0px 0px 2px 0.1px blue"
         keyBox.style.border = "1px solid blue"
@@ -45,31 +48,41 @@ export default function Locker (prop) {
 
     const handleChange = ({target}) => {
         setInputKey(() => target.value)
+        setBoxBorder (()=>true)
+        setError(()=>false)
     }
     
     const handleSubmit = (event) => {
         event.preventDefault()
-        // if(key === inputKey) 
         if(inputKey === password)
         {   
-            setLock(() => false)
             setError(()=>false)
             setLockerFormDisplay (() => false)
+            setLockBtn(() => false)
+            setLock(() => false)
         }
         else {
-            setLock(() => false)
+            setLockBtn(() => false)
             setError(() => true)
+            setLock(() => true)
         } 
     }
 
+
+    const keyBox = document.querySelector(".lockerForm");
+    if (keyBox !== null)
+        if (boxBorder === true)
+            {   keyBox.style.boxShadow = "0px 0px 2px 0.1px blue"
+                keyBox.style.border = "1px solid blue"}
+
+    console.log(boxBorder)
     window.addEventListener("click",({target}) => {
         const box = document.querySelector(".lockerForm");
         if (box !== null)
-            if (target.id !== "locker"){
+            if (target.id !== "locker" && target.id !== "submit"){
                 box.style.boxShadow = "0px 0px 4px 0.5px lightgrey"
                 box.style.border = "1px solid lightgrey"
             }
-        // if (inputKey !== key)
         if(inputKey !== password)
         {
             if (target.id !== "submit")
@@ -81,13 +94,17 @@ export default function Locker (prop) {
    
     return <>
     <div className="">
-        <button className = "lockerBtn d-flex justify-content-center align-items-center "
+        <div 
+            style = {{background: "blue"}}
+            >
+        <button className = "lockerBtn d-flex justify-content-center align-items-center border-0"
                 onClick = {handleLockerBtnClick}>
-        {(lock)
+        {(lockBtn)
             ? <Lock /> 
             : <Unlock /> 
         }
         </button>
+        </div>
         <form   className = "lockerForm p-0 m-0 justify-content-start align-items-center " 
                 id = ""
                 onSubmit={handleSubmit}
@@ -97,7 +114,9 @@ export default function Locker (prop) {
                 <input  type ="password"
                     //   name = "lock"
                     id = "locker"
-                    className ="lockerInput d-flex justify-content-start align-items-center ps-3 "
+                    className ="lockerInput d-flex justify-content-start align-items-center px-3 "
+                    
+                    // className ="lockerInput d-flex justify-content-start align-items-center ps-3 "
                     placeholder = "What's your key"
                     onClick = {handleBoxClick}
                     onChange = {handleChange}
@@ -107,7 +126,7 @@ export default function Locker (prop) {
                 </input>
                 
                 {/*  forwardArrow in the image style */}
-                <div    className =" submitBtn px-1"
+                {/* <div    className ="submitBtn px-1"
                         id = "submit"
                         >
                     <button 
@@ -118,14 +137,14 @@ export default function Locker (prop) {
                         >
                   <ForwardArrow />
                 </button>
-                </div>
+                </div> */}
             {/* </div> */}
         </form>
-        <button     className = "errorField"
+        <div     className = "errorField px-3"
                         id = "passwordError"
                 >
-                    error
-            </button> 
+                    Incorrect key. Try again!
+        </div> 
 
     </div>
     </>

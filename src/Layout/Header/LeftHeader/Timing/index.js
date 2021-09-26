@@ -2,17 +2,18 @@ import React, {useRef, useEffect} from "react";
 import { secondsToMinutes } from "../../../../utils/Duration";
 import { Home, Play, Pause, PlayFilled, PauseFilled } from "../../../../utils/Icons/Header/LeftHeader";
 import { useHistory } from "react-router-dom";
-export default function Timing (prop) {
-    const { 
+export default function Timing (props) {
+  const { 
         isTimerRunning, 
         setIsTimerRunning,  
         setSession,
         focusInterval, 
         breakInterval,
         session 
-    } = prop
+  } = props
   //Step 1: Set interval to run the callback function every second  
-  function useInterval (nextTick, delay) {
+  // function useInterval (nextTick, delay) {
+  const useInterval = (nextTick, delay) => {
     const savedNextTick = useRef()
     //Then set up the interval
     useEffect (() => {
@@ -21,7 +22,8 @@ export default function Timing (prop) {
       if (delay !== null){
         //Note: We should use a callback function we passing it into setInterval
         let id = setInterval(() => savedNextTick.current(),delay)
-        return () => clearInterval(id)}
+        return () => clearInterval(id)
+      }
     },[delay, nextTick])
   }
   
@@ -29,16 +31,18 @@ export default function Timing (prop) {
   //Step 2: Step up nextTick function with a parameter "preState"
 
   const nextTick = (prevState) => {
-    const timeRemaining = Math.max(0,prevState.timeRemaining - 1)
-    const timeElapsed = prevState.timeElapsed + 1
+    // const timeRemaining = Math.max(0,prevState.timeRemaining - 1)
+    const timeElapsed = Math.min(prevState.interval*60,prevState.timeElapsed + 1)
     const timeElapsedPercent = timeElapsed/(prevState.interval*60)*100
     const session = {
         ...prevState,
-        timeRemaining,
+        // timeRemaining,
         timeElapsed,
         timeElapsedPercent
-      }
+    }
     window.localStorage.setItem('storedSession',JSON.stringify(session))
+    // window.localStorage.setItem('storedFocusInterval',JSON.stringify(focusInterval))
+    // window.localStorage.setItem('storedBreakInterval',JSON.stringify(breakInterval))
     return session
   }  
   
@@ -48,52 +52,34 @@ export default function Timing (prop) {
     return (currentSession) => 
       (currentSession.label === "Focusing")
       ?   { label: "On Break",
-            timeRemaining: breakInterval *60,
+            // timeRemaining: breakInterval *60,
             interval: breakInterval,
             timeElapsed:0,
             timeElapsedPercent:0,
-            numSession: currentSession.numSession}
+            numSession: currentSession.numSession
+          }
       :   { label: "Focusing",
-            timeRemaining: focusInterval *60,
+            // timeRemaining: focusInterval *60,
             interval: focusInterval,
             timeElapsed:0,
             timeElapsedPercent:0,
             numSession: currentSession.numSession + 1
-            }
-        }
+          }
+    }
   //Step5: call the useInterval function: if play (istimerRunning): delay 1s, and run the call back function to set state of session with label and timeremining decrementing by 1
     useInterval(() => {
-      if (session.timeRemaining === 0) {
+      // if (session.timeRemaining === 0) {
+      if (session.timeElapsedPercent === 100) {
         console.log("voice")
         return setSession(nextSession(focusInterval, breakInterval))
       }
       return setSession(nextTick)
-      }, 
+    }, 
     isTimerRunning ? 1000 : null
     )
 
-    const handleClick = () => {
-        //Switch the "pause" state variable when the playPause button is clicked   
-        setIsTimerRunning((prevState) => {
-          const nextState = !prevState;
-          if (nextState) {            
-            setSession((prevStateSession) => {
-              // If the timer is starting and the previous session is null,
-              // start a focusing session.
-              if (prevStateSession === null) {
-                return {
-                  label: "Focusing",
-                  timeRemaining: focusInterval * 60,
-                  numSession: 1
-                };
-              }
-              return prevStateSession;
-            });        
-          }
-          return nextState;
-        });
-      }
-   
+    const handleClick = () => setIsTimerRunning(()=> !isTimerRunning)
+      
     //Set timeElapsed
     const secsToMins = secondsToMinutes(session?.timeElapsed)
     
@@ -107,7 +93,6 @@ export default function Timing (prop) {
         localStorage.removeItem('storedFocusInterval')
         window.localStorage.setItem('Url',JSON.stringify("/"))
         history.push("/")  
-
     }
     
     return <ul className = "nav">

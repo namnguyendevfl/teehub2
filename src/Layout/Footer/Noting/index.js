@@ -13,10 +13,11 @@ export default function Noting ({display, setDisplay}) {
     }
 
     const handleDownChevron = () => {
-        const addingBox = document.querySelector("#addingBox")
-        addingBox.style.display = "none"      
-        const addingBar = document.querySelector("#addingBar")
-        addingBar.style.display = "block"
+        setDisplay(() => false)
+        // const addingBox = document.querySelector("#addingBox")
+        // addingBox.style.display = "none"      
+        // const addingBar = document.querySelector("#addingBar")
+        // addingBar.style.display = "block"
     }
     
     const selectedDisplay = ((display) => {

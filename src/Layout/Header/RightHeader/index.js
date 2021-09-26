@@ -45,7 +45,8 @@ export default function RightHeader () {
                 </div>
             }
     </li>
-    <li className ="nav-item d-none d-xl-block ms-3">
+    <li className ="nav-item d-none d-xl-block ms-1">
+    {/* <li className ="nav-item d-none d-xl-block ms-3"> */}
     {btnId === "watch"
               ? <div className="toolTip buttonSm d-flex justify-content-center align-items-center border-white">
                     <button className = "buttonSm d-flex justify-content-center align-items-center border-white"
@@ -69,7 +70,8 @@ export default function RightHeader () {
                 </div>
             }
     </li>
-    <li className ="nav-item d-lg-block d-none ms-0 ms-xl-3">
+    {/* <li className ="nav-item d-lg-block d-none ms-0 ms-xl-3"> */}
+    <li className ="nav-item d-lg-block d-none ms-0 ms-xl-1">
     {btnId === "connect"
               ? <div className="toolTip buttonSm d-flex justify-content-center align-items-center border-white"
                    >
@@ -93,7 +95,8 @@ export default function RightHeader () {
                 </div>
             }
     </li>
-    <li className ="nav-item d-block ms-0 ms-lg-3">
+    {/* <li className ="nav-item d-block ms-0 ms-lg-3"> */}
+    <li className ="nav-item d-block ms-0 ms-lg-1">
     {btnId === "messages"
               ? <div className="toolTip buttonSm d-flex justify-content-center align-items-center border-white">
                     <button className = "buttonSm d-flex justify-content-center align-items-center border-white"
@@ -116,7 +119,8 @@ export default function RightHeader () {
                 </div>
             }
     </li>
-    <li className ="nav-item ms-0 ms-md-3">
+    {/* <li className ="nav-item ms-0 ms-md-3"> */}
+    <li className ="nav-item ms-0 ms-md-1">
     {btnId === "notifications"
               ? <div className="toolTip buttonSm d-flex justify-content-center align-items-center border-white">
                     <button className = "buttonSm d-flex justify-content-center align-items-center border-white"
@@ -141,7 +145,8 @@ export default function RightHeader () {
             }
     </li>
     {/* Create Tooltip for this one */}
-    <li className ="nav-item d-xl-none d-block ms-3"> 
+    {/* <li className ="nav-item d-xl-none d-block ms-3">  */}
+    <li className ="nav-item d-xl-none d-block ms-1"> 
         <div className="toolTip">
               <button   type="button"
                         id = "more"
@@ -188,7 +193,8 @@ export default function RightHeader () {
             : <> </>}
         </div>    
     </li>
-    <li className ="nav-item ms-3 ">
+    {/* <li className ="nav-item ms-3 "> */}
+    <li className ="nav-item ms-1 ">
         <button className = "Ava d-flex justify-content-center align-items-center border-white" > 
                     <Ava />
         </button>

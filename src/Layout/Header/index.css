@@ -35,7 +35,7 @@ header {
         background:#e9ecef ;
     }
 
-    .barFilled, .barSmFilled {
+    .barFilled, .barSmFilled, .pauseBarFilled{
         height:3px;
         width:70px;
         background-color: #0d6efd;
@@ -44,6 +44,9 @@ header {
         position: absolute;
     
       }
+    .pauseBarFilled{
+        background: #d00000;
+    }
     .barSmFilled {
           width:55px;
         }
@@ -54,7 +57,7 @@ header {
         min-width:502px;
     }
     .rightBar {
-        max-width:400px;
+        max-width:350px;
         /* min-width:400px; */
     }
 
